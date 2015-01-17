@@ -20,6 +20,9 @@ public class OI {
 		leftStick = new AttackThree(RobotMap.C_LEFT_JOYSTICK, 0.1);
 		xbox = new XboxController(RobotMap.C_XBOX_CONTROLLER, 0.2);
 		launchPad = new LaunchpadController(RobotMap.C_LAUNCHPAD_CONTROLLER);
+		
+		launchPad.getButton(1).whenPressed(new DriveCommand(.7, .7, 3));
+		launchPad.getButton(2).whenPressed(new DriveCommand(-.7, -.7, 3));
 	}
 
 	/**
