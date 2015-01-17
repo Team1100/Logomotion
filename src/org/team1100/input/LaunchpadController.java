@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class LaunchpadController extends Joystick{
-
-	private JoystickButton exampleA;
-	private JoystickButton exampleB;
+	private JoystickButton[] buttons;
 	
 	/**
 	 * Initializes the inputs controlled by the Launchpad
@@ -15,20 +13,19 @@ public class LaunchpadController extends Joystick{
 	public LaunchpadController(int channel) {
 		super(channel);
 		
-		exampleA = new JoystickButton(this, 1);
-		exampleB = new JoystickButton(this, 2);
+		for (int i = 0; i <= 20; i++){
+			buttons[i] = new JoystickButton(this, i);
+		}
 	}
-	
+
 	/**
-	 * Gets the example button
-	 * 
-	 * @return the example button
+	 * Gets specified button
+	 *  
+	 * @param number the button number
+	 * @return the Button Object corresponding to the number
 	 */
-	public JoystickButton getExampleA(){
-		return exampleA;
-	}
-	public JoystickButton getExampleB(){
-		return exampleB;
+	public JoystickButton getButton(int number){
+		return buttons[number];
 	}
 
 	

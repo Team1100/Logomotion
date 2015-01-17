@@ -1,6 +1,5 @@
 package org.team1100;
 
-import org.team1100.commands.drive.DriveCommand;
 import org.team1100.input.AttackThree;
 import org.team1100.input.LaunchpadController;
 import org.team1100.input.XboxController;
@@ -20,9 +19,6 @@ public class OI {
 		leftStick = new AttackThree(RobotMap.C_LEFT_JOYSTICK, 0.1);
 		xbox = new XboxController(RobotMap.C_XBOX_CONTROLLER, 0.2);
 		launchPad = new LaunchpadController(RobotMap.C_LAUNCHPAD_CONTROLLER);
-				
-		launchPad.getExampleA().whenPressed(new DriveCommand(.7, .7, 3));
-		launchPad.getExampleB().whenPressed(new DriveCommand(-.7, -.7, 3));
 	}
 
 	/**
