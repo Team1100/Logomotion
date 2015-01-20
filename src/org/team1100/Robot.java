@@ -1,6 +1,7 @@
 package org.team1100;
 
 import org.team1100.commands.drive.DriveCommand;
+import org.team1100.subsystems.CANSubsystem;
 import org.team1100.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -19,15 +20,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveTrain;
+	public static CANSubsystem CAN;
 	public static OI OI;
 
 	Command autonomousCommand;
 
 	public void robotInit() {
 		driveTrain = new DriveSubsystem();
+		CAN = new CANSubsystem();
 		OI = new OI();
 		
 		SmartDashboard.putData(driveTrain);
+		SmartDashboard.putData(CAN);
 		autonomousCommand = new DriveCommand(.8, .8, 3);
 	}
 	
