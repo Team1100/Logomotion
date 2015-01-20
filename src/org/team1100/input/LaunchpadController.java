@@ -13,6 +13,8 @@ public class LaunchpadController extends Joystick{
 	public LaunchpadController(int channel) {
 		super(channel);
 		
+		buttons = new JoystickButton[20];
+		
 		for (int i = 1; i <= 20; i++){
 			buttons[i-1] = new JoystickButton(this, i);
 		}
