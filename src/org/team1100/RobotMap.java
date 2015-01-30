@@ -19,4 +19,7 @@ public class RobotMap {
     public static final int C_RIGHT_JOYSTICK = 1;
     public static final int C_XBOX_CONTROLLER = 0;
     public static final int C_LAUNCHPAD_CONTROLLER = 3;
+    
+    //Camera
+    public static final String CAMERA_NAME = "cam0";
 }
