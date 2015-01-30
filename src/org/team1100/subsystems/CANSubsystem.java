@@ -20,8 +20,12 @@ public class CANSubsystem extends Subsystem {
 		return pdp.getCurrent(channel);
 	}
 	
+	public double getTotalCurrent(){
+		return pdp.getTotalCurrent();
+	}
+	
     public void initDefaultCommand() {
-    	setDefaultCommand(new PDPCurrentPrintCommand());
+    	//setDefaultCommand(new PDPCurrentPrintCommand());
     }
 }
 

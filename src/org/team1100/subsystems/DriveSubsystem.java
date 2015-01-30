@@ -5,9 +5,8 @@ import org.team1100.RobotMap;
 import org.team1100.commands.drive.UserDriveCommand;
 import org.team1100.input.XboxController;
 
+import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +19,7 @@ public class DriveSubsystem extends Subsystem {
 	private RobotDrive drive;
 
 	/**
-	 * Initializes the DriveSubsystem, using the talon values from RobotMap
+	 * Initializes the DriveSubsystem, using the Jaguar values from RobotMap
 	 */
 	public DriveSubsystem() {
 		Jaguar frontLeftCIM = new Jaguar(RobotMap.D_FRONT_LEFT_CIM);
