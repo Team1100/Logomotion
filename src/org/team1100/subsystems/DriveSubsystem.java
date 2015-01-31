@@ -17,13 +17,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveSubsystem extends Subsystem {
 
 	private RobotDrive drive;
+	CANJaguar rearLeftCIM;
 
 	/**
 	 * Initializes the DriveSubsystem, using the Jaguar values from RobotMap
 	 */
 	public DriveSubsystem() {
 		Jaguar frontLeftCIM = new Jaguar(RobotMap.D_FRONT_LEFT_CIM);
-		Jaguar rearLeftCIM = new Jaguar(RobotMap.D_REAR_LEFT_CIM);
+		rearLeftCIM = new CANJaguar(3);
 		Jaguar frontRightCIM = new Jaguar(RobotMap.D_FRONT_RIGHT_CIM);
 		Jaguar rearRightCIM = new Jaguar(RobotMap.D_REAR_RIGHT_CIM);
 		
@@ -43,7 +44,7 @@ public class DriveSubsystem extends Subsystem {
 		double rightValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYRight);
 		SmartDashboard.putNumber("Left Value", leftValue);
 		SmartDashboard.putNumber("Right Value", rightValue);
-		
+		rearLeftCIM.set(SmartDashboard.getNumber("Jaguar %"));
 		
 		drive.tankDrive(leftValue, rightValue);
 	}

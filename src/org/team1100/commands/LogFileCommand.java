@@ -54,7 +54,7 @@ public class LogFileCommand extends Command {
     }
 
     protected void execute() {
-    	if (!isWorking)
+    	if (!isWorking || writer == null)
     		return;
     	long currentTime = System.currentTimeMillis();
     	if (currentTime - lastTime >= UPDATE_TIME){

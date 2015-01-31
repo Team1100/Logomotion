@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(CAN);
+		SmartDashboard.putNumber("Jaguar %", 0);
 		autonomousCommand = new DriveCommand(.8, .8, 3);
 		logFileCommand = new LogFileCommand();
 	}
