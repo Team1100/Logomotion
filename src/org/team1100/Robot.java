@@ -1,16 +1,10 @@
 package org.team1100;
 
 import org.team1100.commands.LogFileCommand;
-import org.team1100.commands.drive.DriveCommand;
-import org.team1100.subsystems.CANSubsystem;
 import org.team1100.subsystems.DriveSubsystem;
 
-import com.ni.vision.NIVision.Image;
-
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -26,40 +20,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveTrain;
-	public static CANSubsystem CAN;
 	public static OI OI;
-	
-	private static CANTalon talon;
-	private static Solenoid solenoid;
-	private static CameraServer server;
+	public static LogFileCommand logFileCommand;
 
-	private Command autonomousCommand;
-	private LogFileCommand logFileCommand;
+	private PowerDistributionPanel pdp;
 
 	public void robotInit() {
 		driveTrain = new DriveSubsystem();
-		CAN = new CANSubsystem();
 		OI = new OI();
-		//Tests talon communication
-		talon = new CANTalon(4);
-		//Starts the compressor
-		solenoid = new Solenoid(0);
-		
-		//Camera Testing
-        server = CameraServer.getInstance();
-        server.setQuality(50);
-        server.startAutomaticCapture("cam0");
-        
+		pdp = new PowerDistributionPanel();
+		logFileCommand = new LogFileCommand();
 		
 		SmartDashboard.putData(driveTrain);
-		SmartDashboard.putData(CAN);
-		SmartDashboard.putNumber("Jaguar %", 0);
-		autonomousCommand = new DriveCommand(.8, .8, 3);
-		logFileCommand = new LogFileCommand();
 	}
 	
 	public void autonomousInit() {
-		autonomousCommand.start();
 	}
 
 	public void autonomousPeriodic() {
@@ -68,7 +43,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		autonomousCommand.cancel();
 		logFileCommand.start();
 	}
 	
@@ -92,6 +66,6 @@ public class Robot extends IterativeRobot {
 	}
 	
 	private void log(){
-		
+		logFileCommand.putNumber("Total Current", pdp.getVoltage());
 	}
 }

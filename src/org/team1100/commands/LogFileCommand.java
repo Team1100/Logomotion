@@ -6,72 +6,83 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Hashtable;
 
 import org.team1100.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class LogFileCommand extends Command {
 
-    private File logFile;
-    private PrintWriter writer;
-    private Calendar calobj;
-    private DateFormat time;
-    private boolean isWorking = true;
-    
-    private long lastTime;
-    private final long UPDATE_TIME = 1000; //ms
+	private File logFile;
+	private PrintWriter writer;
+	private DateFormat time;
+	private boolean isWorking = true;
+
+	private long lastTime;
+	private final long UPDATE_TIME = 1000; // ms
+
+	private Hashtable<String, Double> values;
 
 	public LogFileCommand() {
-		requires(Robot.CAN);
-    }
+		values = new Hashtable<String, Double>();
+	}
 
-    protected void initialize() {
-    	DateFormat df = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss");
-    	time = new SimpleDateFormat("HH:mm:ss");
-		calobj = Calendar.getInstance();
-		String fileName = df.format(calobj.getTime());
-		
+	protected void initialize() {
+		DateFormat df = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss");
+		time = new SimpleDateFormat("HH:mm:ss");
+		String fileName = df.format(Calendar.getInstance().getTime());
+
 		File directory = new File("/media/sda1/logs");
-		
-		if (directory.exists() && directory.isDirectory()){
+		if (directory.exists() && directory.isDirectory()) {
 			logFile = new File(directory.getAbsolutePath() + "/" + fileName);
 		} else {
 			logFile = new File("/home/lvuser/robot/" + fileName);
 		}
-		
+
 		try {
 			writer = new PrintWriter(logFile);
 		} catch (FileNotFoundException e) {
-			
+			isWorking = false;
 		}
-		
+
+
 		lastTime = 0;
-    }
+	}
 
-    protected void execute() {
-    	if (!isWorking || writer == null)
-    		return;
-    	long currentTime = System.currentTimeMillis();
-    	if (currentTime - lastTime >= UPDATE_TIME){
-    		writer.printf("[%s] Current @ 0 = %.2f%n",time.format(calobj.getTime()), Robot.CAN.getCurrent(0));
-    		lastTime = currentTime;
-    	}
-    }
+	public void putNumber(String name, double value) {
+		values.put(name, value);
+	}
+	
+	public void removeKey(String name){
+		values.remove(name);
+	}
 
-    protected boolean isFinished() {
-        return !isWorking;
-    }
+	protected void execute() {
+		if (!isWorking)
+			return;
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastTime >= UPDATE_TIME) {
+			writer.printf("[%s] ", time.format(Calendar.getInstance().getTime()));
+			for (String s : values.keySet())
+				writer.printf("%s: %.2f ", s, values.get(s));
+			writer.println();
+			lastTime = currentTime;
+		}
+	}
 
-    protected void end() {
-    	writer.close();
-    }
+	protected boolean isFinished() {
+		return !isWorking;
+	}
 
-    protected void interrupted() {
-    	end();
-    }
+	protected void end() {
+		writer.close();
+	}
+
+	protected void interrupted() {
+		end();
+	}
 }

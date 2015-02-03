@@ -24,7 +24,7 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public DriveSubsystem() {
 		Jaguar frontLeftCIM = new Jaguar(RobotMap.D_FRONT_LEFT_CIM);
-		rearLeftCIM = new CANJaguar(3);
+		rearLeftCIM = new CANJaguar(RobotMap.CAN_REAR_LEFT_CIM);
 		Jaguar frontRightCIM = new Jaguar(RobotMap.D_FRONT_RIGHT_CIM);
 		Jaguar rearRightCIM = new Jaguar(RobotMap.D_REAR_RIGHT_CIM);
 		
@@ -42,9 +42,7 @@ public class DriveSubsystem extends Subsystem {
 		*/
 		double leftValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYLeft);
 		double rightValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYRight);
-		SmartDashboard.putNumber("Left Value", leftValue);
-		SmartDashboard.putNumber("Right Value", rightValue);
-		rearLeftCIM.set(SmartDashboard.getNumber("Jaguar %"));
+		Robot.logFileCommand.putNumber("RL CIM Out Voltage", -rearLeftCIM.getOutputVoltage());
 		
 		drive.tankDrive(leftValue, rightValue);
 	}
