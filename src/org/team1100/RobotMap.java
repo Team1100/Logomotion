@@ -19,4 +19,10 @@ public class RobotMap {
     public static final int C_RIGHT_JOYSTICK = 1;
     public static final int C_XBOX_CONTROLLER = 0;
     public static final int C_LAUNCHPAD_CONTROLLER = 3;
+    
+    //[M]anipulator
+    public static final int M_ELEVATOR_CIM_1 = 9;
+    public static final int M_ELEVATOR_CIM_2 = 8;
+    public static final int M_ENCODER_A = 2;
+    public static final int M_ENCODER_B = 3;
 }

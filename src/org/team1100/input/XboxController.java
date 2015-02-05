@@ -161,6 +161,14 @@ public class XboxController extends Joystick {
 		}
 		return val;
 	}
+	
+	public double getZAxis(){
+		double val = getAxis(Joystick.AxisType.kZ);
+		if (Math.abs(val) <= deadband) {
+			val = 0.0;
+		}
+		return val;
+	}
 }
 
 

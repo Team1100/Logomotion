@@ -2,6 +2,7 @@ package org.team1100;
 
 import org.team1100.commands.drive.DriveCommand;
 import org.team1100.subsystems.DriveSubsystem;
+import org.team1100.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,14 +21,17 @@ public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveTrain;
 	public static OI OI;
+	public static Elevator elevator;
 
 	Command autonomousCommand;
 
 	public void robotInit() {
 		driveTrain = new DriveSubsystem();
 		OI = new OI();
+		elevator = new Elevator();
 		
 		SmartDashboard.putData(driveTrain);
+		SmartDashboard.putData(elevator);
 		autonomousCommand = new DriveCommand(.8, .8, 3);
 	}
 	

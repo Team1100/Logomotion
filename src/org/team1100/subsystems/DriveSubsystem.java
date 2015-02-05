@@ -42,9 +42,6 @@ public class DriveSubsystem extends Subsystem {
 		*/
 		double leftValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYLeft);
 		double rightValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYRight);
-		SmartDashboard.putNumber("Left Value", leftValue);
-		SmartDashboard.putNumber("Right Value", rightValue);
-		
 		
 		drive.tankDrive(leftValue, rightValue);
 	}
