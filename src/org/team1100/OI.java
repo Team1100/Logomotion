@@ -17,7 +17,7 @@ public class OI {
 	public OI() {
 		rightStick = new AttackThree(RobotMap.C_RIGHT_JOYSTICK, 0.1);
 		leftStick = new AttackThree(RobotMap.C_LEFT_JOYSTICK, 0.1);
-		xbox = new XboxController(RobotMap.C_XBOX_CONTROLLER, 0.2);
+		xbox = new XboxController(RobotMap.C_XBOX_CONTROLLER, 0.1);
 		launchPad = new LaunchpadController(RobotMap.C_LAUNCHPAD_CONTROLLER);
 	}
 

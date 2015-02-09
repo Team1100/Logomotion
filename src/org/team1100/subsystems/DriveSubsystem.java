@@ -29,6 +29,7 @@ public class DriveSubsystem extends Subsystem {
 		Jaguar rearRightCIM = new Jaguar(RobotMap.D_REAR_RIGHT_CIM);
 		
 		drive = new RobotDrive(frontLeftCIM, rearLeftCIM, frontRightCIM, rearRightCIM);
+		
 	}
 
 	/**
@@ -61,6 +62,7 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void stop() {
 		drive.tankDrive(0, 0);
+		
 	}
 
 	/**
