@@ -3,14 +3,11 @@ package org.team1100.subsystems;
 import org.team1100.Robot;
 import org.team1100.RobotMap;
 import org.team1100.commands.drive.UserDriveCommand;
-import org.team1100.input.XboxController;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -36,15 +33,8 @@ public class DriveSubsystem extends Subsystem {
 	 * to drive the robot
 	 */
 	public void userDriveTank() {
-		/*
 		double leftValue = Robot.OI.getLeftJoystick().getAxis(Joystick.AxisType.kY);
 		double rightValue = Robot.OI.getRightJoystick().getAxis(Joystick.AxisType.kY);
-		*/
-		double leftValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYLeft);
-		double rightValue = Robot.OI.getXboxController().getAxis(XboxController.XboxAxis.kYRight);
-		SmartDashboard.putNumber("Left Value", leftValue);
-		SmartDashboard.putNumber("Right Value", rightValue);
-		
 		
 		drive.tankDrive(leftValue, rightValue);
 	}
